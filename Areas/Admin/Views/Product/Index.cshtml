@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Module2._1.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Product List</h2>
+
+@if (Model.Any())
+{
+    int i = 0;
+    <table class="table table-striped overflow-scroll">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">STT</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                i++;
+                <tr>
+                    <td class="text-center">@i</td> <!-- Hiển thị STT -->
+                    <td class="text-center">
+                        @if (item.UrlImage == null)
+                        {
+                            <img style="width: 50px; height: 50px;" src="~/images/no_image.jpg" alt="...">
+                        }
+                        else
+                        {
+                            <img style="width: 50px; height: 50px;" src="@item.UrlImage" alt="...">
+                        }
+                    </td>
+
+
+                    <td class="text-center">
+                        <a href="@Url.Action("ChiTiet", "Product", new { id = item.ProductId })">@item.ProductName</a>
+                    </td>
+             
+                    <td class="text-center">@item.Price</td>
+                    <td class="text-center">
+                        <a class="px-2" href="@Url.Action("Xoa", "Product", new { id = item.ProductId })">
+                            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                        </a>
+                        <a class="px-2" href="@Url.Action("CapNhat", "Product", new { id = item.ProductId })">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Không có kết quả tìm kiếm.</p>
+}

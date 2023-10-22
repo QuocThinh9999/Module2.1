@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+
+<div>
+    <h3>@Model.ProductName</h3>
+    @if (Model.UrlImage == null)
+    {
+        <img style="width: 500px; height: 500px;" src="~/images/no_image.jpg" alt="...">
+    }
+    else
+    {
+        <img style="width: 50%; height: 50%;" src="@Model.UrlImage" alt="...">
+    }
+    <p>Price: @Model.Price</p>
+    <p>Description: @Model.Description</p>
+</div>
